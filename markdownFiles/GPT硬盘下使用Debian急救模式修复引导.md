@@ -8,33 +8,33 @@
  - 根据之前安装系统时的分区设置，选择在/dev/sda2上运行shell(/dev/sda2为我的根分区)。
  - 进入shell后执行以下命令：
    - 挂载根分区至/mnt
-   ```bash
+   ```Shell
    mount /dev/sda2 /mnt
    ```
 
    - 挂载boot分区至/mnt/boot
-   ```bash
+   ```Shell
    mount /dev/sda4 /mnt/boot
    ```
    - 挂载GPT硬盘的EFI引导信息至/mnt/boot/efi
-   ```bash
-   mount /dev/sda1 /mnt/boot/efi 
+   ```Shell
+   mount /dev/sda1 /mnt/boot/efi
    ```
    -  挂载home分区至/mnt/home
-   ```bash
+   ```Shell
    mount /dev/sda5 /mnt/home
    ```
    - 重装GRUB
      - 生成GRUB引导
-     ```bash
+     ```Shell
      grub-mkconfig -o /boot/grub/grub.cfg
      ```   
      - 安装GRUB引导
-   ```bash
+   ```Shell
    grub2-install /boot/efi
    ```
 - 重启系统
- ```bash
+ ```Shell
  reboot
  ```
 
