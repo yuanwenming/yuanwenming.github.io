@@ -15,3 +15,5 @@
 - [更改Debian启动项顺序](markdownFiles/更改Debian启动项顺序.md)
 
 - [配置Sublime Text 3以支持搜狗输入](markdownFiles/配置Sublime Text 3以支持搜狗输入.md)
+
+- [如何成为一名黑客(中文版)--分享](http://translations.readthedocs.io/en/latest/hacker_howto.html)
