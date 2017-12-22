@@ -18,4 +18,6 @@
 
 - [如何成为一名黑客(中文版)--分享](http://translations.readthedocs.io/en/latest/hacker_howto.html)
 
-- [Debian9中无法连接Mariadb(Mysql)的原因及解决方法](markdownFiles/Debian9中无法连接Mariadb_Mysql的原因及解决方法)
+- [Debian9中无法连接Mariadb(Mysql)的原因及解决方法](markdownFiles/Debian9中无法连接Mariadb_Mysql的原因及解决方法.md)
+
+- [Git常用命令总结](markdownFiles/git常用命令.md)
