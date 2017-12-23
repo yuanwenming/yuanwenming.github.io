@@ -31,6 +31,16 @@ $ git config --global user.email xxx@xxx.com
 $ git config --global core.editor vim
 ```
 
+- 配置编码
+```bash
+$ git config --global i18n.commitencoding utf8
+```
+
+- 解决中文乱码
+```bash
+$ git config --global core.quotepath false
+```
+
 - 配置差异比较工具
 ```bash
 $ git config --global merge.tool vimdiff
