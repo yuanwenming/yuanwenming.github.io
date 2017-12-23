@@ -21,3 +21,5 @@
 - [Debian9中无法连接Mariadb(Mysql)的原因及解决方法](markdownFiles/Debian9中无法连接Mariadb_Mysql的原因及解决方法.md)
 
 - [Git常用命令总结](markdownFiles/git常用命令.md)
+
+- [Debian9安装Atom后无法启动之解决方法](markdownFiles/Debian9安装Atom后无法启动解决方法.md)
