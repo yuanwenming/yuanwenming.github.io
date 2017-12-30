@@ -23,3 +23,5 @@
 - [Git常用命令总结](markdownFiles/git常用命令.md)
 
 - [Debian9安装Atom后无法启动之解决方法](markdownFiles/Debian9安装Atom后无法启动解决方法.md)
+
+- [vi相关](markdownFiles/vi相关.md)
