@@ -25,3 +25,5 @@
 - [Debian9安装Atom后无法启动之解决方法](markdownFiles/Debian9安装Atom后无法启动解决方法.md)
 
 - [vi相关](markdownFiles/vi相关.md)
+
+- [Gtk+-3.0学习笔记-获取显示设备分辨率](markdownFiles/Gtk+-3.0学习笔记-获取显示设备分辨率.md)
