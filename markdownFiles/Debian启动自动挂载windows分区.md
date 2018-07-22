@@ -1,4 +1,7 @@
-# Debian启动自动挂载windows分区.md
+# Debian启动自动挂载windows分区
+
+---
+
 
 1. 显示windows分区的uuid
     `ls -l /dev/disk/by-uuid`
