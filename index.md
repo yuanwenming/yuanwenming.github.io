@@ -1,6 +1,6 @@
 - [Linux下C编程](yuanwenming.github.io/resources/Linux C 编程--Html版/index.html)
 
-- [Debian 8配置笔记](markdownFiles/Debian 8配置笔记.md)
+- [Debian配置笔记](markdownFiles/Debian 8配置笔记.md)
 
 - [GPT硬盘下使用Debian急救模式修复引导](markdownFiles/GPT硬盘下使用Debian急救模式修复引导.md)
 
@@ -23,3 +23,5 @@
 - [Git常用命令总结](markdownFiles/git常用命令.md)
 
 - [Debian9安装Atom后无法启动之解决方法](markdownFiles/Debian9安装Atom后无法启动解决方法.md)
+
+- [Debian启动自动挂载windows分区](markdownFiles/Debian启动自动挂载windows分区.md)
