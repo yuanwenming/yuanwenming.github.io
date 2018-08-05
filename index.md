@@ -19,7 +19,7 @@
     - [GPT硬盘下使用Debian急救模式修复引导](markdownFiles/GPT硬盘下使用Debian急救模式修复引导.md)
     - [Linux编码相关操作](markdownFiles/Linux编码相关操作.md)
     - [RHEL7配置](markdownFiles/RHEL7配置.md)
-    - [配置Sublime Text 3以支持搜狗输入](markdownFiles/配置Sublime%20Text%203以支持搜狗输入.md)
+    - [配置Sublime Text 3以支持搜狗输入](markdownFiles/配置Sublime_Text_3以支持搜狗输入.md)
     - [Hibernate配置Oracle自增项目](markdownFiles/Hibernate配置Oracle自增项目.md)
     - [Debian本地安装deb文件](markdownFiles/Debian本地安装deb文件.md)
   - Git学习
