@@ -11,7 +11,7 @@
 
 - **笔记**
   - Linux配置
-    - [Debian配置笔记](markdownFiles/Debian%208配置笔记.md)
+    - [Debian配置笔记](markdownFiles/Debian配置笔记.md)
     - [更改Debian启动项顺序](markdownFiles/更改Debian启动项顺序.md)
     - [Debian9安装Atom后无法启动之解决方法](markdownFiles/Debian9安装Atom后无法启动解决方法.md)
     - [Debian启动自动挂载windows分区](markdownFiles/Debian启动自动挂载windows分区.md)
