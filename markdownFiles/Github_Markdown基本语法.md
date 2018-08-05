@@ -9,6 +9,7 @@
 - [**链接**](#链接)
 - [**列表**](#列表)
 - [**任务列表**](#任务列表)
+- [**表格**](#表格)
 
 ### 标题
 可以使用1~6个#来创建标题，#越多，则标题文字越小
@@ -132,3 +133,40 @@ int main(int argc, char * argv[])
 - [x] Finish my changes
 - [ ] Push my commits to GitHub
 - [ ] Open a pull request
+
+### 表格
+
+- 创建表格
+可以使用管道符\'|\'和连字符'-'创建表格。连字符用于创建每个列的标题，而管道用于分隔每个列。必须在表格前面加一个空行才能正确呈现。
+    例：
+
+    \| First Header  | Second Header |
+    \| ------------- | ------------- |
+    \| Content Cell  | Content Cell  |
+    \| Content Cell  | Content Cell  |
+
+
+    结果：
+
+
+    | First Header  | Second Header |
+    | ------------- | ------------- |
+    | Content Cell  | Content Cell  |
+    | Content Cell  | Content Cell  |
+
+- 列对齐
+可以在b标题行连字符的左侧、右侧或两侧包含冒号来对齐文本
+
+    例：
+
+    \| Left-aligned | Center-aligned | Right-aligned |
+    \| :---         |     :---:      |          ---: |
+    \| git status   | git status     | git status    |
+    \| git diff     | git diff       | git diff      |
+
+    结果：
+
+    | Left-aligned | Center-aligned | Right-aligned |
+    | :---         |     :---:      |          ---: |
+    | git status   | git status     | git status    |
+    | git diff     | git diff       | git diff      |
