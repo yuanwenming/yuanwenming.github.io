@@ -25,7 +25,7 @@
   - Git学习
     - [Git常用命令总结](markdownFiles/git常用命令.md)
   - Mysql学习
-    - [Mysql基本操作] To do
+    - [Mysql基本操作](markdownFiles/Mysql基本操作.md)
     - [Debian9中无法连接Mariadb(Mysql)的原因及解决方法](markdownFiles/Debian9中无法连接Mariadb_Mysql的原因及解决方法.md)
   - Vi学习
     - [Vi基本操作]To do
