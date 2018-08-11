@@ -84,6 +84,15 @@ int main(int argc, char * argv[])
 结果：
 [点击跳转到百度](https://www.baidu.com)
 
+### 图片
+和链接很像，只需在开头加上一个感叹号"!"
+例：
+
+    ![Baidu logo](https://www.baidu.com/img/bd_logo1.png)
+
+结果：
+![Baidu logo](https://www.baidu.com/img/bd_logo1.png)
+
 
 ### 列表
 

@@ -1,10 +1,6 @@
 ### **收藏**
   - [菜鸟教程](http://www.runoob.com/)
   - [Linux C一站式编程](resources/Linux%20C%20编程--Html版/index.html)
-
----
-
-### **分享**
   - [如何成为一名黑客(中文版)--分享](http://translations.readthedocs.io/en/latest/hacker_howto.html)
 
 ---
@@ -37,6 +33,7 @@
 
 - #### Git
 
+  - [Git详细手册](https://git-scm.com/docs)
   - [Git常用命令总结](markdownFiles/git常用命令.md)
   - [Git简明教程--分享](http://www.runoob.com/w3cnote/git-guide.html)
 
@@ -48,7 +45,8 @@
 
 - #### Vi
 
-  - [Vi基本操作]To do
+  - [Vi简明教程--分享](http://www.runoob.com/linux/linux-vim.html)
+  - [Vi笔记](markdownFiles/vi_notes.md)
 
 - #### Markdown
 
