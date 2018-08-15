@@ -1,6 +1,6 @@
 ### **收藏**
   - [菜鸟教程](http://www.runoob.com/)
-  - [Linux C一站式编程](resources/Linux%20C%20编程--Html版/index.html)
+  - [Linux C一站式编程](resources/linux_c_programming/index.html)
   - [如何成为一名黑客(中文版)--分享](http://translations.readthedocs.io/en/latest/hacker_howto.html)
 
 ---
