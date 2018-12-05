@@ -37,11 +37,13 @@
   - [Git常用命令总结](markdownFiles/git常用命令.md)
   - [Git简明教程--分享](http://www.runoob.com/w3cnote/git-guide.html)
 
-- #### Mysql
+- #### 数据库
 
   - [Mysql基本操作](markdownFiles/Mysql基本操作.md)
 
   - [Debian9中无法连接Mariadb(Mysql)的原因及解决方法](markdownFiles/Debian9中无法连接Mariadb_Mysql的原因及解决方法.md)
+  
+  - [Dbvisualizer注册破解](markdownFiles/Dbvisualizer_Crash.md)
 
 - #### Vi
 
@@ -71,4 +73,4 @@
   - To do
 
 - #### Docker
-  - To do
+  [Docker安装说明](markdownFiles/Docker_install_manual.md)
