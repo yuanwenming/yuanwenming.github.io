@@ -2,6 +2,7 @@
   - [菜鸟教程](http://www.runoob.com/)
   - [Linux C一站式编程](resources/linux_c_programming/index.html)
   - [如何成为一名黑客(中文版)--分享](http://translations.readthedocs.io/en/latest/hacker_howto.html)
+  - [廖雪峰Git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 
 ---
 
