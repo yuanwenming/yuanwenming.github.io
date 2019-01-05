@@ -1,6 +1,7 @@
 系统强制断电后导致引导丢失及分区文件损坏，导致无法进入系统，以下是修复笔记，记录以备再次出现相同问题。
 
 1. 使用Debian9启动盘，进入急救模式，使用`fdisk -l`查看磁盘分区情况，以我的电脑双盘双系统为例：
+
 ```
 Disk /dev/sda: 2.7 TiB, 3000592982016 bytes, 5860533168 sectors
 Units: sectors of 1 * 512 = 512 bytes
@@ -36,6 +37,7 @@ Device         Start       End   Sectors   Size Type
 ```
 
 2. 使用以下命令挂在分区并重做引导,如果中间没有错误，会出现找到引导的日志，说明引导重建成功
+
 ```shell
 mount /dev/sdb4 /mnt
 mount /dev/sdb1 /mnt/boot/efi
