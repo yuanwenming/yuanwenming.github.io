@@ -64,7 +64,7 @@
   - To do
 
 - #### C
-  - To do
+  - [C学习笔记](markdownFiles/c_memos.md)
 
 - #### Java
   - To do
