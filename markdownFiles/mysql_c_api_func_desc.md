@@ -1,91 +1,91 @@
 # Mysql C API Function 说明
 说明：
-本文内容翻译自Mysql官方说明文档[https://dev.mysql.com/doc/refman/8.0/en/c-api-functions.html](https://dev.mysql.com/doc/refman/8.0/en/c-api-functions.html)
+本文内容由yuanwenming翻译自Mysql 8.0官方说明文档[https://dev.mysql.com/doc/refman/8.0/en/c-api-functions.html](https://dev.mysql.com/doc/refman/8.0/en/c-api-functions.html)
 
 ---
 
-- [mysql_affected_rows](#mysql_affected_rows)
-- [mysql_autocommit](#mysql_autocommit)
-- [mysql_change_user](#mysql_change_user)
-- [mysql_character_set_name](#mysql_character_set_name)
-- [mysql_close](#mysql_close)
-- [mysql_commit](#mysql_commit)
-- [mysql_connect](#mysql_connect)
-- [mysql_create_db](#mysql_create_db)
-- [mysql_data_seek](#mysql_data_seek)
-- [mysql_debug](#mysql_debug)
-- [mysql_drop_db](#mysql_drop_db)
-- [mysql_dump_debug_info](#mysql_dump_debug_info)
-- [mysql_eof](#mysql_eof)
-- [mysql_errno](#mysql_errno)
-- [mysql_error](#mysql_error)
-- [mysql_escape_string](#mysql_escape_string)
-- [mysql_fetch_field](#mysql_fetch_field)
-- [mysql_fetch_field_direct](#mysql_fetch_field_direct)
-- [mysql_fetch_fields](#mysql_fetch_fields)
-- [mysql_fetch_lengths](#mysql_fetch_lengths)
-- [mysql_fetch_row](#mysql_fetch_row)
-- [mysql_field_count](#mysql_field_count)
-- [mysql_field_seek](#mysql_field_seek)
-- [mysql_field_tell](#mysql_field_tell)
-- [mysql_free_result](#mysql_free_result)
-- [mysql_get_character_set_info](#mysql_get_character_set_info)
-- [mysql_get_client_info](#mysql_get_client_info)
-- [mysql_get_client_version](#mysql_get_client_version)
-- [mysql_get_host_info](#mysql_get_host_info)
-- [mysql_get_option](#mysql_get_option)
-- [mysql_get_proto_info](#mysql_get_proto_info)
-- [mysql_get_server_info](#mysql_get_server_info)
-- [mysql_get_server_version](#mysql_get_server_version)
-- [mysql_get_ssl_cipher](#mysql_get_ssl_cipher)
-- [mysql_hex_string](#mysql_hex_string)
-- [mysql_info](#mysql_info)
-- [mysql_init](#mysql_init)
-- [mysql_insert_id](#mysql_insert_id)
-- [mysql_kill](#mysql_kill)
-- [mysql_library_end](#mysql_library_end)
-- [mysql_library_init](#mysql_library_init)
-- [mysql_list_dbs](#mysql_list_dbs)
-- [mysql_list_fields](#mysql_list_fields)
-- [mysql_list_processes](#mysql_list_processes)
-- [mysql_list_tables](#mysql_list_tables)
-- [mysql_more_results](#mysql_more_results)
-- [mysql_next_result](#mysql_next_result)
-- [mysql_num_fields](#mysql_num_fields)
-- [mysql_num_rows](#mysql_num_rows)
-- [mysql_options](#mysql_options)
-- [mysql_options4](#mysql_options4)
-- [mysql_ping](#mysql_ping)
-- [mysql_query](#mysql_query)
-- [mysql_real_connect](#mysql_real_connect)
-- [mysql_real_escape_string](#mysql_real_escape_string)
-- [mysql_real_escape_string_quote](#mysql_real_escape_string_quote)
-- [mysql_real_query](#mysql_real_query)
-- [mysql_refresh](#mysql_refresh)
-- [mysql_reload](#mysql_reload)
-- [mysql_reset_connection](#mysql_reset_connection)
-- [mysql_reset_server_public_key](#mysql_reset_server_public_key)
-- [mysql_result_metadata](#mysql_result_metadata)
-- [mysql_rollback](#mysql_rollback)
-- [mysql_row_seek](#mysql_row_seek)
-- [mysql_row_tell](#mysql_row_tell)
-- [mysql_select_db](#mysql_select_db)
-- [mysql_server_end](#mysql_server_end)
-- [mysql_server_init](#mysql_server_init)
-- [mysql_session_track_get_first](#mysql_session_track_get_first)
-- [mysql_session_track_get_next](#mysql_session_track_get_next)
-- [mysql_set_character_set](#mysql_set_character_set)
-- [mysql_set_local_infile_default](#mysql_set_local_infile_default)
-- [mysql_set_local_infile_handler](#mysql_set_local_infile_handler)
-- [mysql_set_server_option](#mysql_set_server_option)
-- [mysql_shutdown](#mysql_shutdown)
-- [mysql_sqlstate](#mysql_sqlstate)
-- [mysql_ssl_set](#mysql_ssl_set)
-- [mysql_stat](#mysql_stat)
-- [mysql_store_result](#mysql_store_result)
-- [mysql_thread_id](#mysql_thread_id)
-- [mysql_use_result](#mysql_use_result)
-- [mysql_warning_count](#mysql_warning_count)
+1. [mysql_affected_rows](#mysql_affected_rows)
+2. [mysql_autocommit](#mysql_autocommit)
+3. [mysql_change_user](#mysql_change_user)
+4. [mysql_character_set_name](#mysql_character_set_name)
+5. [mysql_close](#mysql_close)
+6. [mysql_commit](#mysql_commit)
+7. [mysql_connect](#mysql_connect)
+8. [mysql_create_db](#mysql_create_db)
+9. [mysql_data_seek](#mysql_data_seek)
+10. [mysql_debug](#mysql_debug)
+11. [mysql_drop_db](#mysql_drop_db)
+12. [mysql_dump_debug_info](#mysql_dump_debug_info)
+13. [mysql_eof](#mysql_eof)
+14. [mysql_errno](#mysql_errno)
+15. [mysql_error](#mysql_error)
+16. [mysql_escape_string](#mysql_escape_string)
+17. [mysql_fetch_field](#mysql_fetch_field)
+18. [mysql_fetch_field_direct](#mysql_fetch_field_direct)
+19. [mysql_fetch_fields](#mysql_fetch_fields)
+20. [mysql_fetch_lengths](#mysql_fetch_lengths)
+21. [mysql_fetch_row](#mysql_fetch_row)
+22. [mysql_field_count](#mysql_field_count)
+23. [mysql_field_seek](#mysql_field_seek)
+24. [mysql_field_tell](#mysql_field_tell)
+25. [mysql_free_result](#mysql_free_result)
+26. [mysql_get_character_set_info](#mysql_get_character_set_info)
+27. [mysql_get_client_info](#mysql_get_client_info)
+28. [mysql_get_client_version](#mysql_get_client_version)
+29. [mysql_get_host_info](#mysql_get_host_info)
+30. [mysql_get_option](#mysql_get_option)
+31. [mysql_get_proto_info](#mysql_get_proto_info)
+32. [mysql_get_server_info](#mysql_get_server_info)
+33. [mysql_get_server_version](#mysql_get_server_version)
+34. [mysql_get_ssl_cipher](#mysql_get_ssl_cipher)
+35. [mysql_hex_string](#mysql_hex_string)
+36. [mysql_info](#mysql_info)
+37. [mysql_init](#mysql_init)
+38. [mysql_insert_id](#mysql_insert_id)
+39. [mysql_kill](#mysql_kill)
+40. [mysql_library_end](#mysql_library_end)
+41. [mysql_library_init](#mysql_library_init)
+42. [mysql_list_dbs](#mysql_list_dbs)
+43. [mysql_list_fields](#mysql_list_fields)
+44. [mysql_list_processes](#mysql_list_processes)
+45. [mysql_list_tables](#mysql_list_tables)
+46. [mysql_more_results](#mysql_more_results)
+47. [mysql_next_result](#mysql_next_result)
+48. [mysql_num_fields](#mysql_num_fields)
+49. [mysql_num_rows](#mysql_num_rows)
+50. [mysql_options](#mysql_options)
+51. [mysql_options4](#mysql_options4)
+52. [mysql_ping](#mysql_ping)
+53. [mysql_query](#mysql_query)
+54. [mysql_real_connect](#mysql_real_connect)
+55. [mysql_real_escape_string](#mysql_real_escape_string)
+56. [mysql_real_escape_string_quote](#mysql_real_escape_string_quote)
+57. [mysql_real_query](#mysql_real_query)
+58. [mysql_refresh](#mysql_refresh)
+59. [mysql_reload](#mysql_reload)
+60. [mysql_reset_connection](#mysql_reset_connection)
+61. [mysql_reset_server_public_key](#mysql_reset_server_public_key)
+62. [mysql_result_metadata](#mysql_result_metadata)
+63. [mysql_rollback](#mysql_rollback)
+64. [mysql_row_seek](#mysql_row_seek)
+65. [mysql_row_tell](#mysql_row_tell)
+66. [mysql_select_db](#mysql_select_db)
+67. [mysql_server_end](#mysql_server_end)
+68. [mysql_server_init](#mysql_server_init)
+69. [mysql_session_track_get_first](#mysql_session_track_get_first)
+70. [mysql_session_track_get_next](#mysql_session_track_get_next)
+71. [mysql_set_character_set](#mysql_set_character_set)
+72. [mysql_set_local_infile_default](#mysql_set_local_infile_default)
+73. [mysql_set_local_infile_handler](#mysql_set_local_infile_handler)
+74. [mysql_set_server_option](#mysql_set_server_option)
+75. [mysql_shutdown](#mysql_shutdown)
+76. [mysql_sqlstate](#mysql_sqlstate)
+77. [mysql_ssl_set](#mysql_ssl_set)
+78. [mysql_stat](#mysql_stat)
+79. [mysql_store_result](#mysql_store_result)
+80. [mysql_thread_id](#mysql_thread_id)
+81. [mysql_use_result](#mysql_use_result)
+82. [mysql_warning_count](#mysql_warning_count)
 
 ---
 
@@ -93,7 +93,7 @@
 my_ulonglong mysql_affected_rows(MYSQL *mysql);
 
 #### **说明**
-[mysql_affected_rows()](#mysql_affected_rows())可能会在使用[mysql_query()](#mysql_query())或[mysql_real_query()](#mysql_real_query())执行语句后立刻被调用。如果最后一次执行的sql操作是UPDATE、DELETE、INSERT，则本函数返回更新、删除、插入的行数。对于SELECT语句来说，[mysql_affected_rows()](#mysql_affected_rows)就像[mysql_num_rows()](#mysql_num_rows)一样。
+[mysql_affected_rows()](#mysql_affected_rows())可能会在使用[mysql_query()](#mysql_query())或[mysql_real_query()](#mysql_query())执行语句后立刻被调用。如果最后一次执行的sql操作是UPDATE、DELETE、INSERT，则本函数返回更新、删除、插入的行数。对于SELECT语句来说，[mysql_affected_rows()](#mysql_affected_rows)就像[mysql_num_rows()](#mysql_num_rows)一样。
 
 在UPDATE语句中，受影响行数的默认值就是实际影响的行数。当连接mysqld时，如果[mysql_real_connect()](#mysql_real_connect())指定了CLIENT_FOUND_ROWS标志，受影响行数的值就是WHERE语句匹配的行数。
 
@@ -1372,11 +1372,45 @@ const char *mysql_stat(MYSQL *mysql);
 MYSQL_RES *mysql_store_result(MYSQL *mysql);
 
 #### **说明**
+在实行了[mysql_query()](#mysql_query())或[mysql_real_query()](#mysql_real_query())时，你必须为每一个能够成功生成结果集的语句（SELECT,SHOW,DESCRIBE,EXPLAIN,CHECK TABLE等等）调用[mysql_store_result()](#mysql_store_result())或[mysql_use_result()](#mysql_use_result())，你也必须在处理完结果集后调用[mysql_free_result()](#mysql_free_result())。
+
+你无需为其它语句调用mysql_store_result()或mysql_use_result()，但如果你调用了mysql_store_result()，它不会有任何坏处或降低性能。你可以通过mysql_store_result()是否返回一个非零值来判断执行的语句是否返回一个结果集。
+
+如果你启用了多语句模式，你需要通过循环调用[mysql_next_result()](#mysql_next_result())来判断是否有更多的结果集。详细可参考示例[C API多语句执行支持](#https://dev.mysql.com/doc/refman/8.0/en/c-api-multiple-queries.html)
+
+如果你想知道一个语句是否会返回一个结果集，你可以使用[mysql_field_count()](#mysql_field_count())来进行检查，详细可参考[mysql_field_count()](#https://dev.mysql.com/doc/refman/8.0/en/mysql-field-count.html)
+
+mysql_store_result()读取整个查询的结果集到客户端，分配一个MYSQL_RES结构体，并将结果放在这个结构体里面。
+mysql_store_result()返回一个空指针，如果语句未返回一个结果集（比如INSERT语句）
+mysql_store_result()如果读取结果集失败时同样返回一个空指针，你可以通过检查mysql_error()是否返回一个空字符串、mysql_errno()是否返回一个非零值、及mysql_field_count()返回零值来判断是否发生了错误。
+
+如果没有行返回这回返回一个空的结果集（空结果集与返回NULL指针值是有区别的）
+
+一旦你通过调用mysql_store_result()获得了一个非空指针字符集，你可以通过调用mysql_num_rows()来获取结果集的行数。
+
+你也可以调用[mysql_fetch_row()](#mysql_retch_row())去fetch结果集，或者使用[mysql_row_seek()](#mysql_row_seek())和[mysql_row_tell()](#mysql_row_tell())去获取或设置在结果集中的位置。
+
+参考[Why mysql_store_result() Sometimes Returns NULL After mysql_query() Returns Success](#https://dev.mysql.com/doc/refman/8.0/en/null-mysql-store-result.html)
 #### **返回值**
+成功返回MYSQL_RES结构体，失败返回NULL(0)
 #### **错误信息**
 #### **示例**
-```c
-```
+如果成功，mysql_store_result()会重置mysql_error()和mysql_errno()。
+
+CR_COMMANDS_OUT_OF_SYNC
+命令已不正确的顺序执行
+
+CR_OUT_OF_MEMORY
+内存溢出
+
+CR_SERVER_GONE_ERROR
+Mysql服务器不可用
+
+CR_SERVER_LOST
+查询过程中到服务器的连接丢失
+
+CR_UNKNOWN_ERROR
+发生未知错误
 
 
 ---
@@ -1405,12 +1439,39 @@ unsigned long mysql_thread_id(MYSQL *mysql);
 MYSQL_RES *mysql_use_result(MYSQL *mysql);
 
 #### **说明**
+在实行了[mysql_query()](#mysql_query())或[mysql_real_query()](#mysql_real_query())时，你必须为每一个能够成功生成结果集的语句（SELECT,SHOW,DESCRIBE,EXPLAIN,CHECK TABLE等等）调用[mysql_store_result()](#mysql_store_result())或[mysql_use_result()](#mysql_use_result())，你也必须在处理完结果集后调用[mysql_free_result()](#mysql_free_result())。
 
+mysql_use_result()启动结果集检索，但实际上并没有像[mysql_store_result()](#mysql_store_result())做的那样将结果集读取到客户端中。相反，必须通过调用[mysql_fetch_row()](#mysql_fetch_row())来单独检索每一行。这会直接从服务器读取查询结果，而不会将其存储在临时表或本地缓冲区中，这样会比[mysql_store_result()](#mysql_store_result())更快并且使用的内存要少得多。客户端仅为当前行和最长到max_allowed_packet字节的通信缓冲区分配内存 。
+
+另一方面，如果在客户端一侧需要对每一行做大量的处理时，或者输出到用户可能输入^S(停止滚动)的屏幕时，最好不要使用[mysql_use_result()](#mysql_use_result())对读取进行加锁，这会占用服务器并阻止其他线程更新从中获取数据的任何表。
+
+使用mysql_use_result()时，必须执行[mysql_fetch_row()](#mysql_fetch_row())直到返回NULL值，否则，未fetch到的行将作为下一个查询的结果集的一部分返回。如果您忘记这样做，C API会给出“Commands out of sync; you can't run this command now”的错误！
+
+您不得对mysql_use_result()返回的结果使用[mysql_data_seek()](#mysql_data_seek())，[mysql_row_seek()](#mysql_row_seek())，[mysql_row_tell()](#mysql_row_tell())，[mysql_num_rows()](#mysql_num_rows())，或[mysql_affected_rows()](#mysql_affected_rows())，也不得发出其他查询，直至mysql_use_result()完成。（但是，在获取所有行之后，[mysql_num_rows()](#mysql_num_rows())准确地返回获取的行数。）
+
+结果集使用完毕后你必须使用[mysql_free_result()](#mysql_free_result())。
 #### **返回值**
+如果发生错误则返回NULL，否则返回一个MYSQL_RES结构体结果。
 #### **错误信息**
+如果成功，mysql_use_result()会重置mysql_error()和mysql_errno()。
+
+CR_COMMANDS_OUT_OF_SYNC
+命令已不正确的顺序执行
+
+CR_OUT_OF_MEMORY
+内存溢出
+
+CR_SERVER_GONE_ERROR
+Mysql服务器不可用
+
+CR_SERVER_LOST
+查询过程中到服务器的连接丢失
+
+CR_UNKNOWN_ERROR
+发生未知错误
+
 #### **示例**
-```c
-```
+无
 
 ---
 
