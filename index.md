@@ -64,7 +64,14 @@
   - To do
 
 - #### C
-  - [C学习笔记](markdownFiles/c_memos.md)
+  - [C学习笔记](markdownFiles/c_learning_memos.md)
+  - [Unix环境高级编程学习笔记](markdownFiles/unix_programing_memos.md)
+  
+- #### 数据结构
+  - To do
+
+- #### 算法
+  - To do
 
 - #### Java
   - To do

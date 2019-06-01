@@ -1,6 +1,6 @@
 # IPC通讯方式
 
-- 管道
+- 管道(匿名管道)
 
     管道是半双工（即数据只能在一个方向上流动）的，且只能在具有公共祖先的两个进程间使用。
     
@@ -34,8 +34,22 @@
     函数popen先执行fork，然后调用exec执行cmdstring，并且返回一个标准I/O文件指针。如果type是“r”，则文件指针连接到cmdstring的标准输出；如果type是“w“，则文件指针连接到cmdstring的标准输入
     
     ![](../resources/pic/pipe_003.png)
+    
+    协同进程(coprocess)
 
-- FIFO
+- FIFO（命名管道）
+
+    管道（匿名管道）只能在两个相关的进程之间使用，而且这两个进程还要有一个共同的创建了他们的祖先进程。
+    但是FIFO（命名管道）在不相干的进程间也能交换数据。
+    
+    相关函数原型：
+    ```c
+    #include <sys/stat.h>
+    int mkfifo(const char *path, mode_t mode);
+    int mkfifoat(int fd, const char *path, mode_t mode);
+    ```
+    
+    
 - 消息队列
 - 信号量
 - 共享存储
