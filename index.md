@@ -47,6 +47,7 @@
   - [Debian9中无法连接Mariadb(Mysql)的原因及解决方法](markdownFiles/Debian9中无法连接Mariadb_Mysql的原因及解决方法.md)
   
   - [Dbvisualizer注册破解](markdownFiles/Dbvisualizer_Crash.md)
+  - [Mysql事务隔离级别(转载)](https://www.cnblogs.com/huanongying/p/7021555.html)
 
 - #### Vi
 
@@ -65,7 +66,7 @@
 
 - #### C
   - [C学习笔记](markdownFiles/c_learning_memos.md)
-  - [Unix环境高级编程学习笔记](markdownFiles/unix_programing_memos.md)
+  - [Unix环境高级编程学习笔记](markdownFiles/unix_programming_memos.md)
   
 - #### 数据结构
   - To do

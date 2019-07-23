@@ -144,4 +144,28 @@ create table 表名(字段定义列表);
 - 备份
 `mysqldump -u root -p --opt 库名 > 文件名`
 - 恢复
-`mysqldump -u root -p 库名 < 文件名`
+`mysql -u root -p 库名 < 文件名`
+
+### 9. 其它操作
+
+- 查看数据库隔离级别  
+  show variables like '%iso%'
+
+- 设置数据库隔离级别  
+  set global tx_isolation=READ-COMMITTED
+- 查看general_log  
+  show variables like 'general_log'
+- 查看general_log_file  
+  show variables like 'general_log_file'
+- 查看log_output  
+  show variables like 'log_output'
+- 查看数据库状态  
+  show engine innodb status\g
+- 查看当前连接信息  
+  show processlist
+- 查看加锁的事务  
+  select * from information.innodb_locks
+- 查看等待锁的事务  
+  select * from information.innodb_lock_waits
+- 设置当前会话连接事务隔离级别
+  set session transaction isolation level read committed;

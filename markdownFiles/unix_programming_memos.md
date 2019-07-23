@@ -1,60 +1,24 @@
-# IPC通讯方式
+# 第1章 UNIX基础知识
 
-- 管道(匿名管道)
+# 第2章 UNIX标准及实现
 
-    管道是半双工（即数据只能在一个方向上流动）的，且只能在具有公共祖先的两个进程间使用。
-    
-    通常一个管道由一个进程创建，在进程调用fork后，该管道就可以在父进程和子进程之间使用了。
-    
-    函数原型：
-    ```c
-    #include <unistd.h>
-    int pipe(int fd[2])
-    ```
-    fd返回两个文件描述符：fd[0]为读而打开、fd[1]为写而打开。fd[1]的输出是fd[0]的输入。
-    
-    单个进程中的管道几乎没有任何用处。通常，进程会先调用pipe，接着调用fork，从而创建从父进程到子进程的IPC通道，反之亦然。
-    
-    fork之后的半双工管道：
-    
-    ![半双工管道](../resources/pic/pipe_001.png)
-    
-    从父进程到子进程的管道：
-    
-    ![从父进程到子进程的管道](../resources/pic/pipe_002.png)
-    
-    其它创建管道的方式：
-    
-    ```c
-    #include <unistd.h>
-    FILE *popen(const char *cmdstring, const char *type);
-    int pclose(FILE *fp);
-    ```
-    
-    函数popen先执行fork，然后调用exec执行cmdstring，并且返回一个标准I/O文件指针。如果type是“r”，则文件指针连接到cmdstring的标准输出；如果type是“w“，则文件指针连接到cmdstring的标准输入
-    
-    ![](../resources/pic/pipe_003.png)
-    
-    协同进程(coprocess)
+# 第3章 文件I/O
 
-- FIFO（命名管道）
+# 第4章 文件和目录
 
-    管道（匿名管道）只能在两个相关的进程之间使用，而且这两个进程还要有一个共同的创建了他们的祖先进程。
-    但是FIFO（命名管道）在不相干的进程间也能交换数据。
-    
-    相关函数原型：
-    ```c
-    #include <sys/stat.h>
-    int mkfifo(const char *path, mode_t mode);
-    int mkfifoat(int fd, const char *path, mode_t mode);
-    ```
-    
-    
-- 消息队列
-- 信号量
-- 共享存储
-- 信号
-- unix domain socket
+# 第5章 标准I/O库
+
+# 第6章 系统数据文件和信息
+
+# 第7章 进程环境
+
+# 第8章 进程控制
+
+# 第9章 进程关系
+
+# 第10章 信号
+
+# 第11章 线程
 
 # Linux多线程
 
@@ -113,4 +77,82 @@
 - pthread_rwlock_trywrlock
 - pthread_rwlock_timedrdlock
 - pthread_rwlock_timedwrlock
+
+# 第12章 线程控制
+
+# 第13章 守护进程
+
+# 第14章 高级I/O
+
+# 第15章 进程间通讯
+
+- 管道(匿名管道)
+
+    管道是半双工（即数据只能在一个方向上流动）的，且只能在具有公共祖先的两个进程间使用。
+    
+    通常一个管道由一个进程创建，在进程调用fork后，该管道就可以在父进程和子进程之间使用了。
+    
+    函数原型：
+    ```c
+    #include <unistd.h>
+    int pipe(int fd[2])
+    ```
+    fd返回两个文件描述符：fd[0]为读而打开、fd[1]为写而打开。fd[1]的输出是fd[0]的输入。
+    
+    单个进程中的管道几乎没有任何用处。通常，进程会先调用pipe，接着调用fork，从而创建从父进程到子进程的IPC通道，反之亦然。
+    
+    fork之后的半双工管道：
+    
+    ![半双工管道](../resources/pic/pipe_001.png)
+    
+    从父进程到子进程的管道：
+    
+    ![从父进程到子进程的管道](../resources/pic/pipe_002.png)
+    
+    其它创建管道的方式：
+    
+    ```c
+    #include <unistd.h>
+    FILE *popen(const char *cmdstring, const char *type);
+    int pclose(FILE *fp);
+    ```
+    
+    函数popen先执行fork，然后调用exec执行cmdstring，并且返回一个标准I/O文件指针。如果type是“r”，则文件指针连接到cmdstring的标准输出；如果type是“w“，则文件指针连接到cmdstring的标准输入
+    
+    ![](../resources/pic/pipe_003.png)
+    
+    协同进程(coprocess)
+
+- FIFO（命名管道）
+
+    管道（匿名管道）只能在两个相关的进程之间使用，而且这两个进程还要有一个共同的创建了他们的祖先进程。
+    但是FIFO（命名管道）在不相干的进程间也能交换数据。
+    
+    相关函数原型：
+    ```c
+    #include <sys/stat.h>
+    int mkfifo(const char *path, mode_t mode);
+    int mkfifoat(int fd, const char *path, mode_t mode);
+    ```
+    
+    
+- 消息队列
+- 信号量
+- 共享存储
+- 信号
+- unix domain socket
+
+# 第16章 网络IPC：套接字
+
+# 第17章 高级进程间通信
+
+# 第18章 终端I/O
+
+# 第19章 伪终端
+
+# 第20章 数据库函数库
+
+# 第21章 与网络打印机通信
+
+
 
