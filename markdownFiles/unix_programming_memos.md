@@ -1,8 +1,159 @@
 # 第1章 UNIX基础知识
 
+
 # 第2章 UNIX标准及实现
 
 # 第3章 文件I/O
+
+- 函数open和openat
+
+    调用open或openat函数可以打开或创建一个文件。
+    ```c
+    #include <fcntl.h>
+    
+    int open(const char *pathname, int flags);
+    int open(const char *pathname, int flags, mode_t mode);
+    
+    int openat(int dirfd, const char *pathname, int flags);
+    int openat(int dirfd, const char *pathname, int flags, mode_t mode);
+    ```
+    
+    - pathname参数是要打开或创建文件的名字。
+    - flags参数用来说明此函数的多个选项，可用下面一个或多个进行“或”运算
+        - 必选（五选一）：
+            - O_RDONLY
+                只读打开
+            - O_WRONLY
+                只写打开
+            - O_RDWR
+                读、写打开
+            - O_EXEC
+                只执行打开
+            - O_SEARCH
+                只搜索打开（应用于目录）
+        - 可选（可多选）：
+            - O_APPEND
+                每次写时都追加到文件的尾端
+            - O_CLOEXEC
+                把FD_CLOEXEC常量设置为文件描述符标志
+            - O_CREAT
+                若此文件不存在则创建它。使用此选项时，open函数必须同时说明第3个参数mode（openat函数需说明第4个参数mode）
+            - O_DIRECTORY
+                如果pathname引用的不是目录则出错
+            - O_EXCL
+                如果同时指定了O_CREAT，而文件已存在，则出错。用此可以测试一个文件是否存在，如果不存在则创建，这使测试和创建文件成为一个原子操作。
+            - O_NOCTTY
+                如果pathname引用的时终端，则不将该设备作为此进程的控制终端
+            - O_NOFOLLOW
+                如果pathname引用的是一个符号链接，则出错
+            - O_NONBLOCK
+                如果pathname引用的是一个FIFO、块特殊文件或字符特殊文件，则此选项为文件本次的打开操作和后续的I/O操作设置非阻塞方式
+            - O_SYNC
+                使每次write等待物理I/O操作完成，包括由该write操作引起的文件属性更新所需的I/O
+            - O_TRUNC
+                如果此文件存在，而且为只写或读-写方式成功打开，则将其长度截为0
+            - O_TTY_INIT
+                如果打开一个还未打开的终端设备，设置非标准termios参数值，使其符合Single UNIX Specification
+            
+            下面两个标志也是可选的，他们是Single UNIX Specification（以及POSIX.1）中同步输入和输出选项的一部分
+            
+            - O_DSYNC
+                使每次write要等待物理I/O操作完成，但是r如果该写操作并不影响读取刚刚写入的数据，则不许等待文件属性被更新
+            - O_RSYNC
+                使每一个以文件描述符作为参数进行的read操作等待，直至所有对文件同一部分挂起的写操作都完成。
+    - mode参数指定了flags为O_CREATE时操作文件的其它模式
+        - S_IRWXU
+            文件所有者拥有读、写、执行权限
+        - S_IRUSR
+            文件所有者拥有读权限
+        - S_IWUSR
+            文件所有者拥有写权限
+        - S_IXUSR
+            文件所有者拥有执行权限
+        - S_IRWXG
+            同组用户拥有读、写、执行权限
+        - S_IRGRP
+            同组用户拥有读权限
+        - S_IWGRP
+            同组用户拥有写权限
+        - S_IXGRP
+            同组用户拥有执行权限
+        - S_RWXO
+            其他用户拥有读、写、执行权限
+        - S_IROTH
+            其它用户拥有读权限
+        - S_IWOTH
+            其他用户拥有写权限
+        - S_IXOTH
+            其他用户拥有执行权限
+        - S_ISUID
+            设置用户ID
+        - S_ISGID
+            设置组ID
+        - S_ISVTX
+            设置sticky bit
+    
+    fd参数把open和openat函数区分开，共有3种可能性：
+    1. pathname参数指定的路径为绝对路径时，fd被忽略，openat函数相当于open函数
+    2. pathname参数指定的是相对路径，fd参数指出了相对路径在文件系统中的开始地址。fd参数是通过打开相对路径所在目录来获取
+    3. pathname参数指定了相对路径，fd参数具有特殊值AT_FDCWD,在这种情况下，路径名在当前工作目录中获取，openat函数在操作上与open函数类似
+- 函数create
+    创建一个新文件
+    ```c
+    #include <fcntl.h>
+    
+    int create(const char *path, mode_t mode);
+    ```
+    
+    此函数等效于：
+    ```c
+    open(path, O_WRONLY|O_CREATE|O_TRUNC, mode);
+    ```
+    
+    
+- 函数close
+    关闭一个已打开的文件
+    ```c
+    #include <fcntl.h>
+    
+    int close(int fd)
+    ```
+    
+    关闭一个文件时还会释放该进程加在该文件上的所有记录锁。
+    当一个进程终止时，内核自动关闭它打开的所有文件。
+- 函数lseek
+    为一个已打开的文件设置偏移量
+    ```c
+    #include <fcntl.h>
+    
+    off_t lseek(int fd, off_t offset, int whence);
+    ```
+    
+    - 若whence为SEEK_SET,则将该文件的偏移量设置为距文件开始出offset个字节
+    - 若whence为SEEK_CUR，则将该文件的偏移量设置为其当前值加offset，offset可为正或负
+    - 若whence为SEEK_END，则将该文件的偏移量设置为文件长度加offset，offset可为正或负
+- 函数read
+    从打开的文件中读取数据
+    ```c
+    #include <fcntl.h>
+    int read(int fd, char *buf, size_t nbytes);
+    ```
+    
+    读取成功返回实际读取的字节数，如到达文件末尾则返回0
+- 函数write
+    向已打开的文件写数据
+    ```c
+    #include <fcntl.h>
+    int write(int fd, const void *buf, size_t nbytes);
+    ```
+    写成功时返回值与 nbytes值相同，否则为失败。
+- 文件共享
+- 原子操作
+- 函数dup和dup2
+- 函数sync、fsync和fdatasync
+- 函数fcntl
+- 函数ioctl
+
 
 # 第4章 文件和目录
 
