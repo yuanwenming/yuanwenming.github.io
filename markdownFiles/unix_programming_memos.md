@@ -147,11 +147,43 @@
     int write(int fd, const void *buf, size_t nbytes);
     ```
     写成功时返回值与 nbytes值相同，否则为失败。
-- 文件共享
-- 原子操作
 - 函数dup和dup2
+    用来复制一个已经存在的文件描述符
+    ```c
+    #include <unistd.h>
+
+    int dup(int fd);
+    int dup2(int fd, int fd2);
+    ```
+
+    dup返回当前可用文件描述符中的最小值。
+    dup2使用fd2指定新描述符，如果fd2已打开，则先关闭。如果fd等于fd2，则dup2不关闭fd2而直接返回。否则，fd2的FD_CLOEXEC文件描述符标志就被清楚，这样fd2在进程调用exec时是打开状态。
 - 函数sync、fsync和fdatasync
+    ```c
+    #include <unistd.h>
+
+    int fsync(int fd);
+    int fdatasync(int fd);
+
+    void sync(void);
+    ```
+
+    sync将所有修改过的块缓冲区排入写队列，然后就返回，不等待实际磁盘写操作结束。
+    fsync函数只对文件描述符fd指定的一个文件起作用，并且等待写磁盘操作结束才返回。可用于数据库这样的程序，需要确保修改过的块立即写入到磁盘。
+    fdatasync函数类似于fsync，但它之影响文件的数据部分，而除数据之外，fsync还会同步更新文件的属性。
 - 函数fcntl
+    fcntl函数可以更改已打开文件的属性。
+    ```c
+    #include <unistd.h>
+    int fcntl(int fd, int cmd, ...);
+    ```
+
+    fcntl函数有以下5种功能：
+    - 复制一个已有的描述符（cmd=F_DUPFD或F_DUPFD_CLOEXEC）
+    - 获取/设置文件描述符标志（cmd=F_GETFD或F_SETFD）
+    - 获取/设置文件状态标志（cmd=F_GETFL或F_SETFL）
+    - 获取/设置异步I/O所有权（cmd=F_GETOWN或F_SETOWN）
+    - 获取/设置记录锁（cmd=F_GETLK、F_SETLK或F_SETLKW）
 - 函数ioctl
 
 
