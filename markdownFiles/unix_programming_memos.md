@@ -185,9 +185,74 @@
     - 获取/设置异步I/O所有权（cmd=F_GETOWN或F_SETOWN）
     - 获取/设置记录锁（cmd=F_GETLK、F_SETLK或F_SETLKW）
 - 函数ioctl
-
+    ioctl函数是I/O操作的杂物箱，不能用其它函数表示的I/O操作通常都可以使用ioctl来操作。
+    ```c
+    #include <sys/ioctl.h>
+    int ioctl(int fd, int request, ...);
+    ```
 
 # 第4章 文件和目录
+
+- 函数stat、fstat、fstatat和lstat
+    获取文件相关信息
+    ```c
+    #include <sys/stat.h>
+    int stat(const char *pathname, struct stat *buf);
+    int fstat(int fd, struct stat *buf);
+    int lstat(const char *pathname, struct stat *buf);
+    int fstatat(int fd, const char *pathname, struct stat *buf, int flag);
+    ```
+    
+    stat返回pathname指向文件的信息结构。
+    fstat返回fd指向文件的信息结构。
+    lstat中pathname指向的文件如果是一个链接文件，则返回链接文件本身的信息结构，而不是链接指向文件的信息。
+    fstatat函数为一个相对于当前打开目录（由fd参数指向）的路径名返回文件统计信息。flag参数控制着是否跟随一个符号链接。当为AT_SYMLINK_NOFOLLOW时不跟随，否则，默认情况下返回链接所指向文件的信息结构。如果fd是AT_FDCWD且pathname是一个相对路径名，fstatat会计算相对于当前目录的pathname参数。如果pathname是一个绝对路径，fd参数会被忽略。
+    
+    结构体stat的基本实现大致如下：
+    struct stat
+    {
+        mode_t          st_mode;
+        ino_t           st_ino;
+        dev_t           st_dev;
+        dev_t           st_rdev;
+        nlink_t         st_nlink;
+        uid_t           st_uid;
+        gid_t           st_gid;
+        off_t           st_size;
+        struct timespec st_atime;
+        struct timespec st_mtime;
+        struct timespec st_ctime;
+        blksize_t       st_blksize;
+        blkcnt_t        st_blocks;
+    }
+- 文件类型
+    - 普通文件
+    - 目录文件
+    - 块特殊文件
+    - 字符特殊文件
+    - FIFO
+    - 套接字
+    - 符号链接
+    
+    文件类型信息包含在stat结构的st_mode成员中，可用以下宏来测试文件类型：
+    |宏|文件类型|
+    |--------|--------|
+    |S_ISREG()|普通文件|
+    |S_ISDIR()|目录文件|
+    |S_ISBLK()|块文件|
+    |S_ISCHR()|字符特殊文件|
+    |S_ISFIFO()|管道或FIFO文件|
+    |S_ISLNK()|符号链接文件|
+    |S_ISSOCK()|套接字文件|
+- 函数access和faccessat
+- 函数umask
+- 函数chmod、fchmod、fchmodat
+- 函数chown、fchown、fchownat和lchown
+- 函数link、linkat、unlink、unlinkat和remove
+- 函数rename和renameat
+- 函数futimens、utimesat和utimes
+- 函数mkdir、mkdirat和rmdir
+- 函数chdir、fchdir和getcwd
 
 # 第5章 标准I/O库
 
