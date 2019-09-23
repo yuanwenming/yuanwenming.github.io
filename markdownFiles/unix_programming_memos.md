@@ -261,7 +261,32 @@
 
     flag参数用于改变faccessat的行为，如果flag设置为AT_EACCESS，访问检查用的是调用进程的有效用户ID和有效组ID，而不是实际用户ID和实际组ID。
 - 函数umask
+    umask为进程设置文件模式创建屏蔽字，并返回之前的值。
+    ```c
+    #include <sys/stat.h>
+    mode_t umask(mode_t cmask);
+    ```
+
+    cmask的值为下列一个或多个进行“或”运算：
+    - S_IRUSR
+    - S_IWUSR
+    - S_IXUSR
+    - S_IRGRP
+    - S_IWGRP
+    - S_IXGRP
+    - S_IROTH
+    - S_IWOTH
+    - S_IXOTH
 - 函数chmod、fchmod、fchmodat
+    chmod、fchmod、fchmodat这3个函数可以更改现有文件的访问权限
+    ```c
+    #include <sys/stat.h>
+    int chmod(char *pathname, mode_t mode);
+    int fchmod(int fd, mode_t mode);
+    int fchmodat(int fd, char *pathname, mode_t mode, int flag);
+    ```
+
+    当fchmodat函数的flag参数设置为AT_SYMLINK_NOFOLLOW标志时，fchmodat并不会跟随符号链接。
 - 函数chown、fchown、fchownat和lchown
 - 函数link、linkat、unlink、unlinkat和remove
 - 函数rename和renameat
