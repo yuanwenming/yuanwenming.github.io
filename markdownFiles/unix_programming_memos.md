@@ -245,6 +245,21 @@
     |S_ISLNK()|符号链接文件|
     |S_ISSOCK()|套接字文件|
 - 函数access和faccessat
+    使用实际用户ID和实际组ID进行访问权限测试。
+    ```c
+    #include <unistd.h>
+    int access(char *pathname, int mode);
+    int faccessat(int fd, char *pathname, int mode, int flag);
+    ```
+
+    |mode|说明|
+    |----|----|
+    |F_OK|测试文件是否存在|
+    |R_OK|测试读权限|
+    |W_OK|测试写权限|
+    |X_OK|测试执行权限|
+
+    flag参数用于改变faccessat的行为，如果flag设置为AT_EACCESS，访问检查用的是调用进程的有效用户ID和有效组ID，而不是实际用户ID和实际组ID。
 - 函数umask
 - 函数chmod、fchmod、fchmodat
 - 函数chown、fchown、fchownat和lchown
