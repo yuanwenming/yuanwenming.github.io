@@ -209,6 +209,7 @@
     fstatat函数为一个相对于当前打开目录（由fd参数指向）的路径名返回文件统计信息。flag参数控制着是否跟随一个符号链接。当为AT_SYMLINK_NOFOLLOW时不跟随，否则，默认情况下返回链接所指向文件的信息结构。如果fd是AT_FDCWD且pathname是一个相对路径名，fstatat会计算相对于当前目录的pathname参数。如果pathname是一个绝对路径，fd参数会被忽略。
     
     结构体stat的基本实现大致如下：
+    ```c
     struct stat
     {
         mode_t          st_mode;
@@ -225,6 +226,7 @@
         blksize_t       st_blksize;
         blkcnt_t        st_blocks;
     }
+    ```
 - 文件类型
     - 普通文件
     - 目录文件
@@ -288,11 +290,89 @@
 
     当fchmodat函数的flag参数设置为AT_SYMLINK_NOFOLLOW标志时，fchmodat并不会跟随符号链接。
 - 函数chown、fchown、fchownat和lchown
+    用于更改文件的用户ID或组ID。如果owner或者group任意一个为-1，则对应ID不改变
+    ```c
+    #include <unistd.h>
+    int chown(char *pathname, uid_t owner, gid_t group);
+    int fchown(int fd, char *pathname, uid_t owner, gid_t group);
+    int fchownat(int fd, char *pathname, uid_t owner, gid_t group, int flag);
+    int lchown(char *pathname, uid_t owner, gid_t group);
+    ```
+- 函数truncate、ftruncate
+    使用这两个函数将文件的长度进行截断
+    ```c
+    #include <unistd.h>
+    int truncate(char *pathname, off_t length);
+    int ftruncate(int fd, off_t length);
+    ```
 - 函数link、linkat、unlink、unlinkat和remove
+    ```c
+    #include <unistd.h>
+    int link(char *existingpath, char *newpath);
+    int linkat(int efd, char *existingpath, int nfd, char *newpath, int flag);
+    int unlink(char *pathname);
+    int unlinkat(int fd, char *pathname, int flag);
+    int remove(char *pathname);
+    ```
 - 函数rename和renameat
+    对文件或目录重命名
+    ```c
+    #include <stdio.h>
+    int rename(char *oldname, char *newname);
+    int renameat(int oldfd, char *oldname, int newfd, char *newname);
+    ```
+- 函数symlink和symlinkat、readlink、readlinkat
+    创建一个符号链接或读取一个链接信息
+    ```c
+    #include <unistd.h>
+    int symlink(char *actualpath, char *sympath);
+    int symlinkat(char *actualpath, int fd, char *sympath);
+    int readlink(char *pathname, char *buf, size_t bufsize);
+    int readlinkat(int fd, char *pathname, char *buf, size_t bufsize);
+    ```
 - 函数futimens、utimesat和utimes
+    访问或修改文件的时间
+    ```c
+    #include <sys/stat.h>
+    int futimens(int fd, const struct timespec times[2]);
+    int utimensat(int fd, const char *path, const struct timespec times[2], int flag);
+    int utimens(char *pathname, const struct timeval times[2]);
+    ```
 - 函数mkdir、mkdirat和rmdir
+    创建或者删除目录
+    ```c
+    #include <sys/stat.h>
+    int mkdir(char *pathname, mode_t mode);
+    int mkdirat(int fd, char *pathname, mode_t mode);
+
+    #include <unistd.h>
+    int rmdir(char *pathname);
+    ```
+- 读目录函数
+    ```c
+    #include <dirent.h>
+    DIR *opendir(char *pathname);
+    DIR *fdopendir(int fd);
+    struct dirent *readdir(DIR *dp);
+    void rewinddir(DIR *dp);
+    int closedir(DIR *dp);
+    long telldir(DIR *dp);
+    void seekdir(DIR *dp, long loc);
+    ```
 - 函数chdir、fchdir和getcwd
+    进程调用chdir、fchdir函数可以更改当前工作目录
+    ```c
+    #include <unistd.h>
+    int chdir(char *pathname);
+    int fchdir(int fd);
+    ```
+
+    进程获取getcwd函数获取绝对路径
+    ```c
+    #include <unistd.h>
+    char *getcwd(char *buf, size_t bufsize);
+    ```
+
 
 # 第5章 标准I/O库
 
