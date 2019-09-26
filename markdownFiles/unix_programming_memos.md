@@ -376,6 +376,127 @@
 
 # 第5章 标准I/O库
 
+- 函数fwide
+    fwide函数可用于设置流的定向
+    ```c
+    #include <wchar.h>
+    int fwide(FILE *fp, int mode);
+    ```
+    
+    根据mode的值不同，fwide函数执行不同的工作
+    - 如果mode为负数，fwide将试图使指定的流是字节指向的
+    - 如果mode为正数，fwide将试图使指定的流时宽定向的
+    - 如果mode为0，fwide将不试图设置流的定向，但返回标识该流定向的值
+- 函数setbuf、setvbuf
+    设置流缓冲
+    ```c
+    #include <stdio.h>
+    int setbuf(FILE *fp, char *buf);
+    int setvbuf(FILE *fp, char *buf, int mode, size_t size);
+    ```
+    
+    setbuf函数可以打开或关闭流的缓冲机制，若buf为NULL，则关闭缓冲
+    setvbuf函数可以更精确的说明所需的缓冲类型，通过指定mode为：
+    - _IOFBF    全缓冲
+    - _IOLBF    行缓冲
+    - _IONBF    不带缓冲
+    如果指定一个不带缓冲的流，则buf和size会被忽略；如果该流是带缓冲的而buf为NULL，则系统自动地为该流分配适当的缓冲区。
+- 函数fflush
+    强制冲洗一个流
+    ```c
+    #include <stdio.h>
+    int fflush(FILE *fp);
+    ```
+- 函数fopen、freopen、fdopen
+    打开一个流
+    ```c
+    #include <stdio.h>
+    FILE *fopen(char *pathname, char *type);
+    FILE *freopen(char *pathname, char *type, FILE *fp);
+    FILE *fdopen(int fd, char *type);
+    ```
+    
+    fopen函数打开路径名为pathname的文件
+    freopen函数在一个指定的流上打开一个文件，如过流已经打开，则先关闭该流。若该流已经定向，则使用freopen清除该定向。此函数一般用于将一个指定的文件打开为一个预定的流：标准输入、标准输出、标准错误
+    fdopen函数取一个已有的文件描述符，并使一个标准的I/O流与该描述符相结合。常用于由创建管道和网络通信通道函数返回的描述符
+    
+    type参数如下：
+    |type|说明|open标志|
+    |----|----|----|
+    |r或rb|为读而打开|O_RDONLY|
+    |w或wb|把文件截断为0长，或为写而创建|O_WRONLY\|O_CREATE\|O_TRUNC|
+    |a或ab|追加；为在文件尾写而打开，或为写而创建|O_WRONLY\|O_CREATE\|O_APPEND|
+    |r+或r+b或rb+|为读和写而打开|O_RDWR|
+    |w+或w+b或wb+|把文件截断至0长，或为读和写而打开|O_RDWR\|O_CREATE\|O_TRUNC|
+    |a+或a+b或ab+|O_RDWR\|O_CREATE\|O_APPEND|
+- 函数fclose
+    关闭一个已经打开的流
+    ```c
+    #include <stdio.h>
+    int fclose(FILE *fp);
+    ```
+- 函数getc、fgetc、getchar
+    从流中一次读取一个字符
+    ```c
+    #include <stdio.h>
+    int getc(FILE *fp);
+    int fgetc(FILE *fp);
+    int getchar(void);  // 等同于getc(stdin)
+    ```
+    
+    不管是出错还是到达文件尾端，这三个函数都返回同样的值。为了区分这两种不同的情况，必须调用ferror或feof
+    ```c
+    #include <stdio.h>
+    int ferror(FILE *fp);
+    int feof(FILE *fp);
+    
+    void clearerr(FILE *fp);
+    ```
+    
+    大多数实现中，为每个流在FILE对象中维护了两个标志：
+    - 出错标志
+    - 文件结束标志
+    调用clearerr可以清除这两个标志
+    
+    从流中读取数据以后，可以调用ungetc将字符再压送回流中。
+    ```c
+    #include <stdio.h>
+    int ungetc(int c, FILE *fp);
+    ```
+- 函数putc、fputc、putchar
+    向流中输出一个字符
+    ```c
+    #include <stdio.h>
+    int putc(int c, FILE *fp);
+    int fputc(int c, FILE *fp);
+    int putchar(int c);  //等同于putc(c, stdout);
+    ```
+- 函数gets、fgets
+    从流中一次读取一行
+    ```c
+    #include <stdio.h>
+    char *gets(char *buf);
+    char *fgets(char *buf, int n, FILE *fp);
+    ```
+    gets不保存读取到的换行符；
+    fgets保存读取到的换行符
+- 函数puts、fputs
+    向流每次输出一行
+    ```c
+    int puts(char *buf);
+    int fputs(char *buf, FILE *fp);
+    ```
+    puts、fputs会将一个以null结尾的buf写入到流中，但puts还会额外写一个换行符
+- 函数fread、fwrite
+    可以执行二进制的读写操作
+    ```c
+    #include <stdio.h>
+    size_t fread(void *ptr, size_t size, size_t nobj, FILE *fp);
+    size_t fwrite(void *ptr, size_t size, size_t nobj, FILE *fp);
+    ```
+    fread从指定的流中一次读取nobj个size大小的数据到ptr中
+    fwrite将ptr中的数据向指定的流中一次写入nobj个size大小的数据
+
 # 第6章 系统数据文件和信息
 
 # 第7章 进程环境
