@@ -500,8 +500,57 @@
 # 第6章 系统数据文件和信息
 
 # 第7章 进程环境
+- 环境变量
+```c
+#include <stdlib.h>
+char *getenv(const char *name)
+int putenv(char *str)
+int setenv(const char *name, const char *value, int rewrite)
+int unsetenv(const char *name)
+```
+
+- setjmp&longjmp
+```c
+#include <setjmp.h>
+int setjmp(jmp_buf env)
+void longjmp(jmp_buf env, int value)
+```
+在希望返回到的位置调用setjmp，在需要返回的地方调用longjmp，通过value返回给setjmp
+
+- getrlimit & setrlimit
+每个进程都有一组资源限制，其中一些可以使用getrlimit和setrlimit进行查询和更改
+```c
+#include <sys/resource.h>
+int getrlimit(int resource, struct rlimit *rlptr)
+int setrlimit(int resource, const struct rlimit *rlptr)
+```
 
 # 第8章 进程控制
+
+- 获取进程相关ID
+```c
+#include <unistd.h>
+pid_t getpid(void)
+pid_t getppid(void)
+uid_t getuid(void)
+uid_t geteuid(void)
+gid_t getgid(void)
+gid_t getegid(void)
+```
+
+- fork函数
+```c
+#inckude <unistd.h>
+pid_t fork(void)
+```
+一个现有进程可以通过fork函数创建一个新进程。fork调用一次，但返回两次。
+两次返回的区别是子进程的返回值为0，而父进程返回值为子进程的进程ID。
+将子进程ID返回给父进程的理由是：一个父进程可以有多个子进程，但没有一个函数可以获得其所有子进程的进程ID，而子进程则可以通过getppid获取父进程的ID。
+子进程和父进程继续执行调用fork后的指令。子进程是父进程的副本，例如，子进程获得父进程的数据空间、堆和栈的副本。父进程和子进程共享正文段
+由于fork之后经常跟随着exec，所以很多实现并不执行一个父进程数据段、堆和栈的完全副本。作为替代，使用写时复制（Copy-On-Write COW）技术。
+
+- vfork函数
+vfork与fork类似，但vfork函数用于创建一个新进程，而该新进程的目的是exec一个新程序，且vfork保证子程序先执行，在它调用exec或exit之后父进程才能被调度运行，当子进程调用这两个函数中的任意一个时，父进程会恢复运行。
 
 # 第9章 进程关系
 
