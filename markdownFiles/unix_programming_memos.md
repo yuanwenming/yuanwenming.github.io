@@ -499,7 +499,66 @@
 
 # 第6章 系统数据文件和信息
 
+- 获取口令文件项
+```c
+#include <pwd.h>
+struct passwd *getpwnam(const char *name);
+struct passwd *getpwuid(uid_t uid)
+```
+
+- 查看整个口令文件
+```c
+#include <pwd.h>
+struct passwd *getpwent(void);
+void setpwent(void);
+void endpwent(void);
+```
+getpwent返回口令文件的下一个记录项，每次调用此函数都会重写passwd结构体。
+setpwent反绕它所使用的文件，endpwent则关闭这些文件。
+在使用getpwent查看完口令文件后，一定要调用endpwent关闭文件，因为getpwent知道何时打开它所使用的文件，但不知何时关闭文件。
+
 # 第7章 进程环境
+
+- 进程终止方式
+    有8中终止方式，5种正常终止：
+        - 从main返回
+        - 调用exit
+        - 调用_exit或_Exit
+        - 最后一个线程从其启动例程返回
+        - 从最后一个线程调用pthread_exit
+    3中异常终止：
+        - 调用abort
+        - 接到一个信号
+        - 最后一个线程对取消做出响应
+- 退出函数
+    ```c
+    #include <stdlib.h>
+    void exit(int status)
+    void _Exit(int status)
+
+    #include <unistd.h>
+    void _exit(int status)
+    ```
+    exit函数总是执行一个标准I/O库的清理关闭操作，对于所有打开流调用fclose函数。_Exit和_exit立即进入内核
+- 函数atexit
+    ```c
+    #include <stdlib.h>
+    int atexit(void (*func)(void))
+    ```
+    atexit的参数是一个函数地址，当调用此函数时无需向它传递任何参数，也不期望它返回一个值。exit调用这些函数时与登记的顺序相反，同一函数如果登记多次，也会被调用多次。
+- C程序启动及终止方式
+    ![](../resources/pic/exit.png)
+- C程序存储空间布局 
+    - 正文段
+        存储由CPU执行的机器指令部分，通常是只读的且可共享
+    - 初始化数据段
+        通常称此段为数据段，包含了程序中需要明确赋初值的变量，例如程序中的全局变量
+    - 未初始化数据段
+        未初始化数据段，通常称为bss段。在程序开始前，内核将此段中的数据初始化为0或空指针
+    - 栈
+        自动变量以及函数调用时所需保存的信息都放在此段中。
+    - 堆
+        动态分配存储
 
 # 第8章 进程控制
 
